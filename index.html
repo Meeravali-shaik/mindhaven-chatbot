@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindHaven - Your Mental Health Support Companion</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">🧠</div>
+                    <h1 class="app-title">MindHaven</h1>
+                </div>
+                <button class="crisis-button" onclick="showCrisisResources()">
+                    🆘 Crisis Help
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Chat Container -->
+        <main class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+                <!-- Initial greeting will be added by JavaScript -->
+            </div>
+
+            <!-- Typing Indicator -->
+            <div class="typing-indicator hidden" id="typingIndicator">
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <span class="typing-text">MindHaven is typing...</span>
+            </div>
+
+            <!-- Quick Action Buttons -->
+            <div class="quick-actions">
+                <button class="quick-btn" onclick="startBreathingExercise()">
+                    🫁 Breathing Exercise
+                </button>
+                <button class="quick-btn" onclick="showGroundingExercise()">
+                    🌱 Grounding Exercise
+                </button>
+                <button class="quick-btn" onclick="showJournalingPrompt()">
+                    📝 Journaling Prompt
+                </button>
+                <button class="quick-btn" onclick="showProfessionalResources()">
+                    👩‍⚕️ Find Help
+                </button>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <textarea 
+                        id="messageInput" 
+                        placeholder="Share what's on your mind... I'm here to listen."
+                        rows="1"
+                    ></textarea>
+                    <button class="send-button" id="sendButton" onclick="sendMessage()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
+                        </svg>
+                    </button>
+                    <button class="mic-button" id="micButton" onclick="startVoiceRecognition()" title="Speak">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="#333" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3zm5 10a5 5 0 0 1-10 0H5a7 7 0 0 0 14 0h-2zm-5 9a7 7 0 0 0 7-7h-2a5 5 0 0 1-10 0H5a7 7 0 0 0 7 7z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Modals -->
+        <!-- Crisis Resources Modal -->
+        <div class="modal hidden" id="crisisModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>🆘 Crisis Support Resources (India)</h3>
+                    <button class="close-btn" onclick="closeModal('crisisModal')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p class="crisis-intro">If you're in immediate danger, please call 112 (India's emergency number). Otherwise, these resources are available 24/7:</p>
+                    
+                    <div class="resource-card">
+                        <h4>Kiran Mental Health Helpline</h4>
+                        <p><strong>Call: 1800-599-0019</strong></p>
+                        <p>National toll-free helpline for mental health support, available 24/7 in multiple languages.</p>
+                        <a href="https://mohfw.gov.in/kiran-mental-health-rehabilitation-helpline" target="_blank">Visit Website</a>
+                    </div>
+
+                    <div class="resource-card">
+                        <h4>iCALL Psychosocial Helpline (TISS)</h4>
+                        <p><strong>Call: 9152987821</strong></p>
+                        <p>Email: icall@tiss.edu</p>
+                        <p>Free and confidential support for mental health concerns, available Monday to Saturday, 8am to 10pm.</p>
+                        <a href="https://icallhelpline.org/" target="_blank">Visit Website</a>
+                    </div>
+
+                    <div class="resource-card">
+                        <h4>Sneha Foundation</h4>
+                        <p><strong>Call: 044-24640050</strong></p>
+                        <p>Email: help@snehaindia.org</p>
+                        <p>24/7 suicide prevention helpline based in Chennai, available in English and Tamil.</p>
+                        <a href="https://snehaindia.org/contact-us/" target="_blank">Visit Website</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Professional Resources Modal -->
+        <div class="modal hidden" id="resourcesModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>👩‍⚕️ Professional Mental Health Resources (India)</h3>
+                    <button class="close-btn" onclick="closeModal('resourcesModal')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="resource-card">
+                        <h4>Therapize India</h4>
+                        <p>Find verified therapists, counselors, and mental health professionals across India.</p>
+                        <a href="https://therapizeindia.com/find-a-therapist/" target="_blank">Find a Therapist</a>
+                    </div>
+
+                    <div class="resource-card">
+                        <h4>MindPeers</h4>
+                        <p>Book online therapy sessions and access mental wellness resources.</p>
+                        <a href="https://mindpeers.co/" target="_blank">Visit MindPeers</a>
+                    </div>
+
+                    <div class="resource-card">
+                        <h4>Manastha</h4>
+                        <p>Online counseling and therapy platform with certified professionals.</p>
+                        <a href="https://manastha.com/" target="_blank">Learn More</a>
+                    </div>
+
+                    <div class="resource-card">
+                        <h4>Indian Association for Clinical Psychologists</h4>
+                        <p>Directory of registered clinical psychologists in India.</p>
+                        <a href="https://iACP.in/" target="_blank">Find a Psychologist</a>
+                    </div>
+
+                    <div class="disclaimer">
+                        <p><strong>Remember:</strong> While I'm here to provide support and coping strategies, I'm not a replacement for professional therapy. If you're dealing with persistent mental health challenges, please consider reaching out to a licensed mental health professional.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Breathing Exercise Modal -->
+        <div class="modal hidden" id="breathingModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>🫁 Breathing Exercise</h3>
+                    <button class="close-btn" onclick="closeModal('breathingModal')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="breathing-exercise" id="breathingExercise">
+                        <!-- Content will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    <script src="app.js"></script>
+</body>
+</html>
